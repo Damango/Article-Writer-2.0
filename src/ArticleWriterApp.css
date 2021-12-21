@@ -1,0 +1,56 @@
+.article-writer-app{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    padding-top: 1px;
+}
+
+.view-changer-nav-bar-container{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 25px;
+    background-color: #008000;
+    width: 750px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.view-changer-nav-selector{
+    position: relative;
+    background-color: white;
+    width: 100%;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+.publish-button{
+    background-color: rgb(59, 214, 59);
+    color: white;
+    font-weight: bold;
+}
+
+.text-sections-container{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    margin-top: 175px;
+
+}
+
+.text-editor-bar-container{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    margin-top: 100px;
+    width: 750px;
+    height: 40px;
+    border: 1px solid black;
+}
