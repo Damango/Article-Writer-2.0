@@ -25,30 +25,32 @@ const ArticleWriterApp = () => {
 
         }
     }
-
-
-
-
-
-
-
-
     function addTextSection(e) {
-
         let theSections = [...textSections]
-
-
-
-
         if (e.key === 'Enter') {
             e.preventDefault()
             theSections.push('test')
             setTextSections(theSections)
         }
-        else {
-            // props.updateTextSection(props.index, theText)
-        }
+    }
 
+    function changeTextProperties(select, type, value) {
+        let selection = window.getSelection();
+        console.log(selection)
+        // Creates a new element, and insert the selected text with the chosen font inside
+        let e = document.createElement('span');
+
+
+
+        e.style = 'font-weight:' + 600 + ';';
+
+        console.log(e)
+
+        e.innerHTML = selection.toString();
+
+        let range = selection.getRangeAt(0);
+        range.deleteContents(); // Deletes selected text…
+        range.insertNode(e); // … and inserts the new element at its place
 
     }
 
@@ -70,10 +72,34 @@ const ArticleWriterApp = () => {
             </div>
         </div>
 
-        <div className='text-editor-bar-container'></div>
+        <div className='text-editor-bar-container'>
+
+            <div className='text-editor-button'>
+                <i class="fas fa-font" style={{ marginRight: '10px' }}></i> <span style={{ marginRight: '10px' }}>Roboto</span > <i class="fas fa-sort-down"></i>
+            </div>
+
+            <div className='text-editor-button' >
+                <i class="fas fa-bold" onMouseDown={() => { changeTextProperties() }}></i>
+            </div>
+
+            <div className='text-editor-button'>
+                <i class="fas fa-italic"></i>
+            </div>
+
+            <div className='text-editor-button'>
+                <i class="fas fa-underline"></i>
+            </div>
+
+            <div className='text-editor-button'>
+                <i class="fas fa-strikethrough"></i>
+            </div>
+
+
+
+        </div>
 
         <div className='text-sections-container'>
-            {textSections.map((section) => <TextSection viewState={viewState} addTextSection={addTextSection} />)}
+            {textSections.map((section) => <TextSection changeTextProperties={changeTextProperties} viewState={viewState} addTextSection={addTextSection} />)}
 
         </div>
 
@@ -83,7 +109,7 @@ const ArticleWriterApp = () => {
 
 
 
-    </div>);
+    </div >);
 }
 
 export default ArticleWriterApp;
