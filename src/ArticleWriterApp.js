@@ -2,6 +2,7 @@ import React from 'react';
 import "./ArticleWriterApp.css"
 
 import TextSection from './Components/TextSections/TextSection';
+import ArticleProfileBar from './Components/ArticleProfileBar/ArticleProfileBar';
 
 import { useState, useEffect } from 'react'
 
@@ -34,17 +35,19 @@ const ArticleWriterApp = () => {
         }
     }
 
-    function changeTextProperties(select, type, value) {
+    function changeTextProperties(type, value) {
         let selection = window.getSelection();
-        console.log(selection)
+        console.log(selection.anchorNode.parentElement) //selection.parentElement
         // Creates a new element, and insert the selected text with the chosen font inside
         let e = document.createElement('span');
 
+        if (type === 'weight') {
+            e.style = 'font-weight:' + value + ';';
+        }
 
-
-        e.style = 'font-weight:' + 600 + ';';
-
-        console.log(e)
+        else if (type === 'style') {
+            e.style = 'font-style:' + value + ';'
+        }
 
         e.innerHTML = selection.toString();
 
@@ -55,7 +58,10 @@ const ArticleWriterApp = () => {
     }
 
 
+
     return (<div className="article-writer-app">
+
+        <ArticleProfileBar />
 
         <div className='view-changer-nav-bar-container'>
             <div className={'view-changer-nav-selector ' + (viewState === 'write' ? 'selector-active' : '')} onClick={() => { setViewState('write') }}>
@@ -72,18 +78,23 @@ const ArticleWriterApp = () => {
             </div>
         </div>
 
-        <div className='text-editor-bar-container'>
+        <div className='text-editor-bar-container' style={{ display: viewState === 'write' ? '' : 'none' }}>
+
+            <div className="text-editor-button">
+
+                <button><i class="fas fa-plus-circle" style={{ marginRight: 5 }}></i>Insert</button>
+            </div>
 
             <div className='text-editor-button'>
-                <i class="fas fa-font" style={{ marginRight: '10px' }}></i> <span style={{ marginRight: '10px' }}>Roboto</span > <i class="fas fa-sort-down"></i>
+                <span style={{ marginRight: '8px' }}>Roboto</span > <i class="fas fa-sort-down" style={{ position: 'relative', top: '-3px' }}></i>
             </div>
 
             <div className='text-editor-button' >
-                <i class="fas fa-bold" onMouseDown={() => { changeTextProperties() }}></i>
+                <i class="fas fa-bold" onMouseDown={() => { changeTextProperties('weight', 'bold') }}></i>
             </div>
 
             <div className='text-editor-button'>
-                <i class="fas fa-italic"></i>
+                <i class="fas fa-italic" onMouseDown={() => { changeTextProperties('style', 'italic') }}></i>
             </div>
 
             <div className='text-editor-button'>
@@ -99,6 +110,7 @@ const ArticleWriterApp = () => {
         </div>
 
         <div className='text-sections-container'>
+
             {textSections.map((section) => <TextSection changeTextProperties={changeTextProperties} viewState={viewState} addTextSection={addTextSection} />)}
 
         </div>

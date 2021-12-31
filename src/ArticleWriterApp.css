@@ -8,6 +8,7 @@
 }
 
 .view-changer-nav-bar-container{
+    z-index: 10;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
@@ -41,11 +42,12 @@
     transform: translateX(-50%);
     width: 750px;
     margin-top: 175px;
-    background-color: red;
+   
 
 }
 
 .text-editor-bar-container{
+    z-index: 10;
     display: flex;
     position: fixed;
     left: 50%;
@@ -53,8 +55,10 @@
     background-color: white;
     margin-top: 100px;
     width: 750px;
-    height: 40px;
+    height: 45px;
     border: 1px solid black;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .text-editor-button{
